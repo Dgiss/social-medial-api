@@ -11,7 +11,6 @@ module.exports = class Users {
         this.app.post('/users/', (req, res)=> {
             try{
                 const userModel = new this.UserModel(req.body);
-
                 userModel.save().then((user) => {
                     res.status(200).json(user || {});
                 }).catch((err)=>{
@@ -27,7 +26,9 @@ module.exports = class Users {
                 });
             }
         });
-
+        this.app.get('/users', (req, res) => { 
+                res.send(await user.find())
+         } )
 
         this.app.put('/users/:email', (req, res) => {
             try {
